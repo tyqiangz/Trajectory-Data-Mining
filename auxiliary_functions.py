@@ -196,7 +196,7 @@ def SPDA(traj, distThres, timeThres, minPoints):
             dist = distance(traj.iloc[j,:], traj.iloc[i,:])
             if dist < distThres:
                 timeDiff = (traj.time[j] - traj.time[i]).total_seconds()
-                if (timeDiff > timeThres) and (j-1 >= minPoints):
+                if (timeDiff > timeThres) and (j-i >= minPoints):
                     centroid = getCentroid(traj.loc[i:(j-1),:], "median")
                     stayPoints.append(
                         stayPoint(
