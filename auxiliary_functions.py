@@ -4,12 +4,14 @@ import random
 from statistics import mean, median
 from math import radians, cos, sin, asin, sqrt
 import matplotlib.pyplot as plt
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 def genTrajectory(NUM_POINTS = 20 , x_range=[100,110], y_range=[0,5], timestep_range=[60, 600], rad_range=[0,100]):
     '''
     randomly generate distance to take for each time step
     '''
+    startDate = date(2019, 4, 13)
+    
     x_points = np.random.uniform(low=x_range[0], high=x_range[1], size=NUM_POINTS)
     y_points = np.random.uniform(low=y_range[0], high=y_range[1], size=NUM_POINTS)
     t_points = np.random.uniform(low=timestep_range[0], high=timestep_range[1], size=NUM_POINTS)
