@@ -5,6 +5,7 @@ from statistics import mean, median
 from math import radians, cos, sin, asin, sqrt
 import matplotlib.pyplot as plt
 from datetime import datetime, date, timedelta
+import numba
 
 def genTrajectory(NUM_POINTS = 20 , x_range=[100,110], y_range=[0,5], timestep_range=[60, 600], rad_range=[0,100]):
     '''
@@ -135,7 +136,7 @@ def plot_filtered_traj(traj, mean_traj, median_traj, window_size):
 
     for ax in axs.flat:
         ax.set(xlabel='longitude', ylabel='latitude')
-        
+
 class stayPoint:
     def __init__(self, arrivalTime, departTime, startIndex, endIndex, location):
         '''
@@ -157,7 +158,7 @@ class stayPoint:
         '''
         print(f"(arrivalTime: {self.arrivalTime}, departTime: {self.departTime}, startIndex: {self.startIndex}, "+
             f"endIndex: {self.endIndex}, location: {self.location})")
-        
+
 def SPDA(traj, distThres, timeThres, minPoints):
     '''
     :param traj: a trajectory
@@ -196,7 +197,7 @@ def SPDA(traj, distThres, timeThres, minPoints):
         while j < pointNum:
             print("Analysing point: " + str(j) + " "*10, "\r", end="")
             dist = distance(traj.iloc[j,:], traj.iloc[i,:])
-            if dist < distThres:
+            if dist > distThres:
                 timeDiff = (traj.time[j] - traj.time[i]).total_seconds()
                 if (timeDiff > timeThres) and (j-i >= minPoints):
                     centroid = getCentroid(traj.loc[i:(j-1),:], "median")
