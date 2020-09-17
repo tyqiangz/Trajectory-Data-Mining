@@ -5,7 +5,6 @@ from statistics import mean, median
 from math import radians, cos, sin, asin, sqrt
 import matplotlib.pyplot as plt
 from datetime import datetime, date, timedelta
-import numba
 
 def genTrajectory(NUM_POINTS = 20 , x_range=[100,110], y_range=[0,5], timestep_range=[60, 600], rad_range=[0,100]):
     '''
